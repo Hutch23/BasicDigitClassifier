@@ -159,4 +159,4 @@ def get_image(filename):
     
     return normalized_image
 
-test_model_descriptive(get_image('handwritten2.png'))
+test_model_descriptive(get_image("https://i.imgur.com/a3Rql9C.png"))
