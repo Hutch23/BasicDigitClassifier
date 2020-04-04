@@ -12,6 +12,10 @@ import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
 
+# Set random seeds to ensure consistency
+np.random.seed(1)
+tf.random.set_seed(1) 
+
 """ LOAD DATA """
 mnist = tf.keras.datasets.mnist
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
@@ -27,8 +31,14 @@ x_train = tf.keras.utils.normalize(x_train, axis=1)
 x_test = tf.keras.utils.normalize(x_test, axis=1)
 
 """ MODEL CREATION """
+
+# Hyperparemeters
 hidden_layer_size = 128
 output_size = 10
+num_epochs=10
+early_stopper = tf.keras.callbacks.EarlyStopping(monitor='accuracy', 
+                                                 mode='max', patience=2)
+
 model = tf.keras.Sequential([
     tf.keras.layers.Flatten(input_shape = (28, 28)),
     tf.keras.layers.Dense(hidden_layer_size, activation='relu'),
@@ -39,7 +49,7 @@ model = tf.keras.Sequential([
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', 
               metrics=['accuracy'])
 
-model.fit(x=x_train, y=y_train, epochs=10)
+model.fit(x=x_train, y=y_train, epochs=num_epochs, callbacks=[early_stopper])
 
 """ MODEL EVALUATION """
 test_loss, test_acc = model.evaluate(x_test, y_test)
