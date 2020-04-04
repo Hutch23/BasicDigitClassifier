@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Apr 3 10:21:31 2020
-
 @author: Parker Hutchinson
 
 Some inspiration from:
 https://www.kaggle.com/yassineghouzam/introduction-to-cnn-keras-0-997-top-6
+and 
+https://www.sitepoint.com/keras-digit-recognition-tutorial/
 """
 
 import numpy as np
